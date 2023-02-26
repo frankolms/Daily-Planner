@@ -22,12 +22,15 @@ $(function () {
   // current hour in 24-hour time?
 
   var currentHour = "hour-" + dayjs().format("H");
-  var timeBlock = $("div.container-fluid").children().attr("id");
-  if (currentHour === timeBlock) {
-    $(timeBlock).removeClass("past").addClass("present");
+  var timeBlock = $("div.container-fluid").children();
+  console.log(timeBlock);
+  for (var i = 0; i < timeBlock.length; i++) {
+    if (currentHour === timeBlock.attr("id")) {
+      timeBlock.removeClass("past").addClass("present");
+    }
   }
   console.log(currentHour);
-  console.log(timeBlock);
+  console.log(timeBlock.length);
 
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
