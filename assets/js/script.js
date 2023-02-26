@@ -8,16 +8,34 @@ $(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  //
+  $(".saveBtn").click(function () {
+    var tasks = $(this).siblings(".description").val();
+    var parentId = $(this).parent().attr("id");
+    console.log(tasks);
+    localStorage.setItem(parentId, tasks);
+  });
+
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
+
+  var currentHour = "hour-" + dayjs().format("H");
+  var timeBlock = $("div.container-fluid").children().attr("id");
+  if (currentHour === timeBlock) {
+    $(timeBlock).removeClass("past").addClass("present");
+  }
+  console.log(currentHour);
+  console.log(timeBlock);
+
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
+
   //
   // TODO: Add code to display the current date in the header of the page.
+  var todaysDateAndTime = dayjs();
+  $("#currentDay").text(todaysDateAndTime.format("dddd, MMMM D, YYYY"));
 });
