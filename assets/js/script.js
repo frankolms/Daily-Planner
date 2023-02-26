@@ -9,8 +9,8 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   $(".saveBtn").click(function () {
-    var tasks = $(this).siblings(".description").val();
     var parentId = $(this).parent().attr("id");
+    var tasks = $(this).siblings(".description").val();
     console.log(tasks);
     localStorage.setItem(parentId, tasks);
   });
@@ -21,24 +21,58 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
 
-  var currentHour = "hour-" + dayjs().format("H");
-  var timeBlock = $("div.container-fluid").children();
-  console.log(timeBlock);
-  for (var i = 0; i < timeBlock.length; i++) {
-    if (currentHour === timeBlock.attr("id")) {
-      timeBlock.removeClass("past").addClass("present");
-    }
+  function hourUpdater() {
+    var currentHour = dayjs().hour();
+    console.log(currentHour);
+    $(".time-block").each(function () {
+      var blockHour = parseInt($(this).attr("id").split("-")[1]);
+      console.log(blockHour);
+      if (blockHour < currentHour) {
+        $(this).addClass("past");
+      } else if (blockHour === currentHour) {
+        $(this).removeClass("past");
+        $(this).addClass("present");
+      } else {
+        $(this).removeClass("past");
+        $(this).removeClass("present");
+        $(this).addClass("future");
+      }
+    });
   }
-  console.log(currentHour);
-  console.log(timeBlock.length);
+
+  // var currentHour = "hour-" + dayjs().hour();
+  // var timeBlock = $("div.container-fluid").children();
+  // console.log(timeBlock);
+  // console.log(timeBlock.length);
+  // for (var i = 0; i < timeBlock.length; i++) {
+  //   if (timeBlock[i].attr("id") === currentHour) {
+  //     timeBlock[i].removeClass("past");
+  //     timeBlock[i].addClass("present");
+  //   }
+  // }
 
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
 
+  function renderTasks() {
+    $(".description").each(function () {
+      var getTasks = localStorage.getItem($(this).parent().attr("id"));
+      console.log(getTasks);
+      if (getTasks !== null) {
+        $(this).val(getTasks);
+      } else {
+        return;
+      }
+    });
+  }
+
   //
   // TODO: Add code to display the current date in the header of the page.
   var todaysDateAndTime = dayjs();
   $("#currentDay").text(todaysDateAndTime.format("dddd, MMMM D, YYYY"));
+
+  hourUpdater();
+  renderTasks();
 });
