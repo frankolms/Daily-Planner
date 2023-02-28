@@ -25,6 +25,7 @@ $(function () {
     var currentHour = dayjs().hour();
     console.log(currentHour);
     $(".time-block").each(function () {
+      console.log(blockHour);
       var blockHour = parseInt($(this).attr("id").split("-")[1]);
       console.log(blockHour);
       if (blockHour < currentHour) {
@@ -39,17 +40,6 @@ $(function () {
       }
     });
   }
-
-  // var currentHour = "hour-" + dayjs().hour();
-  // var timeBlock = $("div.container-fluid").children();
-  // console.log(timeBlock);
-  // console.log(timeBlock.length);
-  // for (var i = 0; i < timeBlock.length; i++) {
-  //   if (timeBlock[i].attr("id") === currentHour) {
-  //     timeBlock[i].removeClass("past");
-  //     timeBlock[i].addClass("present");
-  //   }
-  // }
 
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
