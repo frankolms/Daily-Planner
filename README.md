@@ -5,3 +5,5 @@ This is a daily work day planner that helps you schedule out your day from 9AM t
 ![Alt text](<./assets/Screenshot%20(35).png>)
 
 ![Alt text](<./assets/Screenshot%20(36).png>)
+
+Deployed project: https://frankolms.github.io/Daily-Planner/
