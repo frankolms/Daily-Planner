@@ -21,6 +21,7 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
 
+  //I was assisted with this block of code by a learning assistant through ASKBCS
   function hourUpdater() {
     var currentHour = dayjs().hour();
     console.log(currentHour);
